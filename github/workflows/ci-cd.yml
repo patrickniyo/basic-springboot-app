@@ -1,0 +1,22 @@
+name: Build & Deploy API
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: [self-hosted, linux, x64]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+    
+    - name: Build with Maven
+      run: mvn -B clean install compile --file pom.xml
